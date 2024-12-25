@@ -22,7 +22,3 @@ var (
 	// Указатель программы
 	PC          = MEMORYSIZE
 )
-
-func StackIsEmpty() bool {
-	return SC >= 128
-}
