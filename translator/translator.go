@@ -13,11 +13,6 @@ func (*Translator) Translate(memory []string) [1024]int {
 	return translate(memory)
 }
 
-// Преобразователь машинного кода команд в строковое представлени
-//
-// Используется для читаемого вывода
-var CommandPrintFormer = make(map[int]string)
-
 func translate(memory []string) [1024]int {
 	var machineMemory [1024]int
 
@@ -74,10 +69,6 @@ func translate(memory []string) [1024]int {
 			machineMemory[idx+global.MEMORYSIZE] = i
 		} else {
 			machineMemory[idx+global.MEMORYSIZE] = machineCode
-		}
-
-		if _, exists := CommandPrintFormer[machineCode]; !exists {
-			CommandPrintFormer[machineCode] = command
 		}
 	}
 

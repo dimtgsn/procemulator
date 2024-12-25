@@ -1,9 +1,7 @@
 package interpreter
 
 import (
-	"fmt"
 	"procemulator/global"
-	"procemulator/translator"
 )
 
 type Interpreter struct {}
@@ -18,9 +16,6 @@ func interpret(machineCode [1024]int) [1024]int {
 loop:
 	for {
 		curCommand := machineCode[global.PC]
-		fmt.Printf("Команда: %d - %s\n", global.PC, translator.CommandPrintFormer[curCommand])
-		fmt.Printf("SC: %d - Значение: %d\n", global.SC, machineCode[global.SC])
-		fmt.Println("------------------------")
 
 		switch curCommand {
 		case 0b0: // SKIP
