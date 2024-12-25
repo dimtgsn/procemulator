@@ -32,13 +32,10 @@ loop:
 			machineCode[machineCode[global.SC]] = machineCode[global.SC+1]
 			global.SC += 2
 			global.PC++
-		case 0b1010: // SWAP
-			machineCode[global.SC], machineCode[global.SC+1] = machineCode[global.SC+1], machineCode[global.SC]
-			global.PC++
-		case 0b1011: // INC
+		case 0b110: // INC
 			machineCode[global.SC] = 1 + machineCode[global.SC]
 			global.PC++
-		case 0b1111: // JUMP
+		case 0b1000: // JUMP
 			switch {
 			case machineCode[global.SC+1] <= 0:
 				machineCode[global.SC+1] = machineCode[global.SC]
@@ -47,8 +44,7 @@ loop:
 			default:
 				global.PC++
 			}
-
-		case 0b1001: // CMP
+		case 0b101: // CMP
 			if (machineCode[global.SC] - machineCode[global.SC+1]) == 0 {
 				machineCode[global.SC+1] = 0
 			} else if (machineCode[global.SC] - machineCode[global.SC+1]) < 0 {
@@ -58,21 +54,11 @@ loop:
 			}
 			global.SC++
 			global.PC++
-		case 0b1000: // STC:
-			global.SC--
-			machineCode[global.SC] = global.PC
-		case 0b110: // DROP
-			global.SC++
-			global.PC++
-		case 0b101: // DUP
-			global.SC--
-			machineCode[global.SC] = machineCode[global.SC+1]
-			global.PC++
 		case 0b100: // ADD
 			global.SC++
 			machineCode[global.SC] = machineCode[global.SC-1] + machineCode[global.SC]
 			global.PC++
-		case 0b1100: // END
+		case 0b111: // END
 			break loop
 		}
 	}

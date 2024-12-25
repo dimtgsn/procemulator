@@ -40,24 +40,14 @@ func translate(memory []string) [1024]int {
 			machineCode = 0b11
 		case "ADD":
 			machineCode = 0b100
-		case "DUP":
-			machineCode = 0b101
-		case "DROP":
-			machineCode = 0b110
-		case "LDC":
-			machineCode = 0b111
-		case "STC":
-			machineCode = 0b1000
 		case "CMP":
-			machineCode = 0b1001
-		case "SWAP":
-			machineCode = 0b1010
+			machineCode = 0b101
 		case "INC":
-			machineCode = 0b1011
+			machineCode = 0b110
 		case "END":
-			machineCode = 0b1100
+			machineCode = 0b111
 		case "JUMP":
-			machineCode = 0b1111
+			machineCode = 0b1000
 		default:
 			if intValue, err := strconv.Atoi(command); err == nil {
 				machineCode = intValue
