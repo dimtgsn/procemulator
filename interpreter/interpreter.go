@@ -28,14 +28,14 @@ loop:
 		case 0b10: // READ
 			machineCode[global.SC] = machineCode[machineCode[global.SC]]
 			global.PC++
-		case 0b11: // WRITE
+		case 0b11: // STORE
 			machineCode[machineCode[global.SC]] = machineCode[global.SC+1]
 			global.SC += 2
 			global.PC++
 		case 0b110: // INC
 			machineCode[global.SC] = 1 + machineCode[global.SC]
 			global.PC++
-		case 0b1000: // JUMP
+		case 0b1000: // JMP
 			switch {
 			case machineCode[global.SC+1] <= 0:
 				machineCode[global.SC+1] = machineCode[global.SC]

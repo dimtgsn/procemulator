@@ -5,13 +5,26 @@ import (
 	"strconv"
 )
 
-type Translator struct {}
+type Translator struct{}
 
 func New() *Translator { return &Translator{} }
 
 func (*Translator) Translate(memory []string) [1024]int {
 	return translate(memory)
 }
+
+type Command string
+
+const (
+	PUSH  Command = "PUSH"
+	READ  Command = "READ"
+	STORE Command = "STORE"
+	ADD   Command = "ADD"
+	CMP   Command = "CMP"
+	INC   Command = "INC"
+	JMP   Command = "JMP"
+	END   Command = "END"
+)
 
 func translate(memory []string) [1024]int {
 	var machineMemory [1024]int
@@ -32,21 +45,21 @@ func translate(memory []string) [1024]int {
 		var machineCode int
 
 		switch command {
-		case "PUSH":
+		case string(PUSH):
 			machineCode = 0b1
-		case "READ":
+		case string(READ):
 			machineCode = 0b10
-		case "WRITE":
+		case string(STORE):
 			machineCode = 0b11
-		case "ADD":
+		case string(ADD):
 			machineCode = 0b100
-		case "CMP":
+		case string(CMP):
 			machineCode = 0b101
-		case "INC":
+		case string(INC):
 			machineCode = 0b110
-		case "END":
+		case string(END):
 			machineCode = 0b111
-		case "JUMP":
+		case string(JMP):
 			machineCode = 0b1000
 		default:
 			if intValue, err := strconv.Atoi(command); err == nil {
